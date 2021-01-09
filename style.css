@@ -1,0 +1,12 @@
+#disasters {
+    width: 150px;
+    background-color: white;
+}
+
+#applyCSS #dataDiv{
+    margin: 10px;
+}
+
+#stateInput {
+    width: 70px;
+}

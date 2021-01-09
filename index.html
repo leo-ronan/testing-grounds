@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="API-Call.js"></script>
+</head>
+<body>
+    <div class="dataDiv">
+        <input id="stateInput" type="search" placeholder="Enter your state's abbreviation here"></input>
+        
+        <button id="submit" >Submit</button>
+
+        <span style="display: inline-block">
+            <label for="startDate">Start Date</label>
+            <br />
+            <input id="startDateInput" name="endDate" type="date"></input>
+        </span>
+
+        <span style="display: inline-block">
+            <label for="endDate">End Date</label>
+            <br />
+            <input id="endDateInput" name="endDate" type="date"></input>
+        </span>
+        <span style="display: inline-block">
+            <label for="disasters">Included Disaster</label>
+            <br />
+            <select id="disasters" name="disasters">   
+                <option value="Biological">Biological</option>
+                <option value="Chemical">Chemical</option>
+                <option value="Coastal Storm">Coastal Storm</option>
+                <option value="Dam/Levee Break">Dam/Levee Break</option>
+                <option value="Drought">Drought</option>
+                <option value="Earthquake">Earthquake</option>
+                <option value="Explosion">Explosion</option>
+                <option value="Fire">Fire</option>
+                <option value="Fishing Losses">Fishing Losses</option>
+                <option value="Flood">Flood</option>
+                <option value="Freezing">Freezing</option>
+                <option value="Human Cause">Human Cause</option>
+                <option value="Hurricane">Hurricane</option>
+                <option value="Mud/Landslide">Mud/Landslide</option>
+                <option value="Other">Other</option>
+                <option value="Severe Ice Storm">Severe Ice Storm</option>
+                <option value="Severe Storm(s)">Severe Storm(s)</option>
+                <option value="Snow">Snow</option>
+                <option value="Terrorist">Terrorist</option>
+                <option value="Tornado">Tornado</option>
+                <option value="Toxic Substances">Toxic Substances</option>
+                <option value="Tsunami">Tsunami</option>
+                <option value="Typhoon">Typhoon</option>
+                <option value="Volcano">Volcano</option>
+            </select>
+        </span>
+        <span style="display: inline-block">
+            <label for="eDisasters">Excluded Disasters</label>
+            <br />
+            <select id="eDisasters" name="eDisasters">   
+                <option value="Biological">Biological</option>
+                <option value="Chemical">Chemical</option>
+                <option value="Coastal Storm">Coastal Storm</option>
+                <option value="Dam/Levee Break">Dam/Levee Break</option>
+                <option value="Drought">Drought</option>
+                <option value="Earthquake">Earthquake</option>
+                <option value="Explosion">Explosion</option>
+                <option value="Fire">Fire</option>
+                <option value="Fishing Losses">Fishing Losses</option>
+                <option value="Flood">Flood</option>
+                <option value="Freezing">Freezing</option>
+                <option value="Human Cause">Human Cause</option>
+                <option value="Hurricane">Hurricane</option>
+                <option value="Mud/Landslide">Mud/Landslide</option>
+                <option value="Other">Other</option>
+                <option value="Severe Ice Storm">Severe Ice Storm</option>
+                <option value="Severe Storm(s)">Severe Storm(s)</option>
+                <option value="Snow">Snow</option>
+                <option value="Terrorist">Terrorist</option>
+                <option value="Tornado">Tornado</option>
+                <option value="Toxic Substances">Toxic Substances</option>
+                <option value="Tsunami">Tsunami</option>
+                <option value="Typhoon">Typhoon</option>
+                <option value="Volcano">Volcano</option>
+            </select>
+        </span>
+        <ul id="data"></ul>
+    </div>
+</body>
+</html>
