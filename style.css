@@ -1,3 +1,6 @@
+body {
+    background-color: gray;
+}
 #disasters {
     width: 150px;
     background-color: white;
