@@ -1,4 +1,53 @@
 $(document).ready(function () {
+    //Store selected disaster types in storage spans (inc/excStorage) FIX THIS
+    var incListArr = {
+        status: "empty",
+        types: []
+    };
+    $(".incList").on("click", event => {
+        console.log(event.target.value);
+        var isDuplicate = false;
+        if (incListArr.status !== "empty") {
+            for (let i = 0; i < incListArr.length; i++) {
+                if (event.target.value == incListArr[i]) {
+                    isDuplicate = true;
+                }
+            }
+        }
+        if (isDuplicate == false) {
+            var newInc = document.createElement("p");
+            newInc.innerHTML = event.target.value + ",";
+            document.getElementById("incStorage").appendChild(newInc);
+            newInc.style.display = "inline-block";
+            incListArr.types.push(event.target.value);
+            incListArr.status = "in use";
+        }
+    });
+
+    var excListArr = {
+        status: "empty",
+        types: []
+    };
+    $(".excList").on("click", event => {
+        console.log(event.target.value);
+        var isDuplicate = false;
+        if (excListArr.status !== "empty") {
+            for (let i = 0; i < excListArr.length; i++) {
+                if (event.target.value == excListArr[i]) {
+                    isDuplicate = true;
+                }
+            }
+        }
+        if (isDuplicate == false) {
+            var newExc = document.createElement("p");
+            newExc.innerHTML = event.target.value + ",";
+            document.getElementById("excStorage").appendChild(newExc);
+            newExc.style.display = "inline-block";
+            excListArr.types.push(event.target.value);
+            excListArr.status = "in use"
+        }
+    });
+
     var filters = {
         disasters: {
             include: "",
@@ -15,7 +64,7 @@ $(document).ready(function () {
     }
     
     $("#submit").on("click", function() {
-        //Get desired filters
+        //Get desired filters MUST CHANGE DISASTERS INCLUDE TO NOW UTILIZE inc/excListArr.
         filters = {
             disasters: {
                 include: $("#disasters").val(),
@@ -25,65 +74,41 @@ $(document).ready(function () {
                 county: null,
                 state: $("#stateInput").val()
             },
-            startDate: $("#startDateInput").val(),
-            endDate: null 
+            date: {
+                startDate: $("#startDateInput").val(),
+                endDate: $("#endDateInput").val()
+            }
         }
         console.log(filters);
-        //TEST
-        var disasterInc, disasterExc, disasterFilter;
-        if (filters.disasters.include == null && filters.disasters.exclude == null) {
-            //All
-            disasterFilter = "";
-            console.log(disasterFilter);
-        }
-        else if (filters.disasters.include !== null && filters.disasters.exclude !== null) {
-            //Include and exclude
-            disasterInc = filters.disasters.include;
-            disasterExc = filters.disasters.exclude;
-            disasterFilter = "incidentType%20eq%20%27" + disasterInc + "%27%20and%20incidentType%20ne%20%27" + disasterExc + "%27";
-            console.log(disasterFilter);
-        }
-        else if (filters.disasters.include !== null && filters.disasters.exclude == null) {
-            //Only include
-            disasterInc = filters.disasters.include;
-            disasterFilter = "incidentType%20eq%20%27" + disasterInc + "%27";
-            console.log(disasterFilter);
-        }
-        else if (filters.disasters.include == null && filters.disasters.exclude !== null) {
-            //Only exclude
-            disasterExc = filters.disasters.exclude;
-            disasterFilter = "incidentType%20ne%20%27" + disasterExc + "%27";
-            console.log(disasterFilter);
-        }
-        
+        console.log($("#endDateInput").val());
+        femaCall(filters);
     });
     
     function femaCall(filters) {
-    
         //Set up variables for storing response data
-        var date;
         var disasterStart, disasterEnd, disasterType, disasterCounty, disasterStatus;
-        var disasterInc, disasterExc, state, county, start, end;
-        var disasterFilter, locationFilter, dateFilter;
+        var locationState, locationCounty, locationFilter
+        var disasterInc, disasterExc, disasterFilter;
+        var date1, date2, dateFilter;
         
         if (filters !== null) {
         //DISASTERS
-        if (filters.disasters.include == null && filters.disasters.exclude == null) {
+        if (filters.disasters.include == "" && filters.disasters.exclude == "") {
             //All
-            disasterInc = "";
+            disasterFilter = "";
         }
-        else if (filters.disasters.include !== null && filters.disasters.exclude !== null) {
+        else if (filters.disasters.include !== "" && filters.disasters.exclude !== "") {
             //Include and exclude
             disasterInc = filters.disasters.include;
             disasterExc = filters.disasters.exclude;
             disasterFilter = "incidentType%20eq%20%27" + disasterInc + "%27%20and%20incidentType%20ne%20%27" + disasterExc + "%27";
         }
-        else if (filters.disasters.include !== null && filters.disasters.exclude == null) {
+        else if (filters.disasters.include !== "" && filters.disasters.exclude == "") {
             //Only include
             disasterInc = filters.disasters.include;
             disasterFilter = "incidentType%20eq%20%27" + disasterInc + "%27";
         }
-        else if (filters.disasters.include == null && filters.disasters.exclude !== null) {
+        else if (filters.disasters.include == "" && filters.disasters.exclude !== "") {
             //Only exclude
             disasterExc = filters.disasters.exclude;
             disasterFilter = "incidentType%20ne%20%27" + disasterExc + "%27";
@@ -91,45 +116,60 @@ $(document).ready(function () {
         
         //LOCATION
         if (filters.location.county == null && filters.location.state == null) {
-            //All disasters
-            
+            //No location filter
+            locationFilter = "";
         }
         else if (filters.location.county !== null && filters.location.state !== null) {
-            //Include and exclude
-            
+            //Filter by state and county
+            locationState = filters.location.state;
+            locationCounty = filters.location.county;
+            locationFilter = "state%20eq%20%27" + locationState + "%27%20and%20declaredCountyArea%20eq&20&27" + locationCounty + "%27";
         }
         else if (filters.location.county !== null && filters.location.state == null) {
-            //Only include
-            
+            //Filter by county only
+            locationCounty = filters.location.county;
+            locationFilter = "declaredCountyArea%20eq%20%27" + locationCounty + "%27";
         }
         else if (filters.location.county == null && filters.location.state !== null) {
-            //Only exclude
-            
+            //Filter by state only
+            locationState = filters.location.state;
+            locationFilter = "state%20eq%20%27" + locationState + "%27";
         }
 
         //DATE
         if (filters.date.startDate == null && filters.date.endDate == null) {
-            //All disasters
-            
+            //No date filter
+            dateFilter = "";
         }
         else if (filters.date.startDate !== null && filters.date.endDate !== null) {
-            //Include and exclude
-            
+            //Start and end date filter
+            date1 = filters.date.startDate;
+            date2 = filters.date.endDate;
+            dateFilter = "declarationDate%20ge%20%27" + date1 + "%27%20and%20declarationDate%20le%20%27" + date2 + "%27";
         }
         else if (filters.date.startDate !== null && filters.date.endDate == null) {
-            //Only include
-            
+            //Filter by start date only
+            date1 = filters.date.startDate;
+            dateFilter = "declarationDate%20ge%20%27" + date1;
         }
         else if (filters.date.startDate == null && filters.date.endDate !== null) {
-            //Only exclude
-            
+            //Filter by end date only
+            date2 = filters.date.endDate;
+            dateFilter = "declarationDate%20le%20%27" + date2;
         }
         }
-
+        //Ensure link is spaced properly depending on which data is being filtered
+        if (dateFilter != "" && locationFilter != "") {
+            dateFilter = "%20and%20" + dateFilter;
+        }
+        if ((disasterFilter != "" && dateFilter != "") || (disasterFilter != "" && dateFilter == "" && locationFilter != "")) {
+            disasterFilter = "%20and%20" + disasterFilter;
+        }
         //$filter=declarationDate%20{gt, lt, eq}%27{date in ISO-8601 format}%27%20{and, or}%20state%20{eq, ne}%20%27{state abbr. (caps)}%27
           //gt = greater than, lt = less than, eq = equal to, ne = not equal to (exclude)
         var linkStart = "https://www.fema.gov/api/open/v1/DisasterDeclarationsSummaries?$filter=";
-        var queryURL = linkStart + locationFilter + "%20" + dateFilter + "%20" + disasterFilter;
+        var queryURL = linkStart + locationFilter + dateFilter + disasterFilter;
+        console.log(queryURL);
         $.ajax({
             datatype: "json",
             url: queryURL,
@@ -141,35 +181,36 @@ $(document).ready(function () {
                 var res = response.DisasterDeclarationsSummaries
     
                 //Read last item in array
-                var lastDec = (res.length) - 1;1
-    
-                //Store info in previously created variables
-                disasterCounty = res[lastDec].declaredCountyArea;
-                disasterType = res[lastDec].incidentType;
-                disasterStart = res[lastDec].incidentBeginDate;
-                disasterEnd = res[lastDec].incidentEndDate;
-                //If there is no end date, set disasterStatus to true (active)
-                if (disasterEnd != null) {
-                    disasterStatus = false;
+                if (res.length == 0) {
+                    alert("No data!");
                 }
                 else {
-                    disasterStatus = true;
-                }
+                    var lastDec = (res.length) - 1;
     
-                //Display info
-                $("#data").append("<li id='county'>County: " + disasterCounty + "</li>");
-                $("#data").append("<li id='type'>Type: " + disasterType + "</li>");
-                $("#data").append("<li id='start'>Start: " + disasterStart + "</li>");
-                if (disasterStatus == false){
-                    $("#data").append("<li id='end'>End: " + disasterEnd + "</li>");
-                }
-                else {
-                    $("#data").append("<li id='status'>Still active!</li>")
-                }
-                //History saved case
-                if (saveHistory == true) {
-                    $("#data").append("<li>-----</li>");
-                }
+                    //Store info in previously created variables
+                    disasterCounty = res[lastDec].declaredCountyArea;
+                    disasterType = res[lastDec].incidentType;
+                    disasterStart = res[lastDec].incidentBeginDate;
+                    disasterEnd = res[lastDec].incidentEndDate;
+                    //If there is no end date, set disasterStatus to true (active)
+                    if (disasterEnd != null) {
+                        disasterStatus = false;
+                    }
+                    else {
+                        disasterStatus = true;
+                    }
+        
+                    //Display info
+                    $("#data").append("<li id='county'>County: " + disasterCounty + "</li>");
+                    $("#data").append("<li id='type'>Type: " + disasterType + "</li>");
+                    $("#data").append("<li id='start'>Start: " + disasterStart + "</li>");
+                    if (disasterStatus == false){
+                        $("#data").append("<li id='end'>End: " + disasterEnd + "</li>");
+                    }
+                    else {
+                        $("#data").append("<li id='status'>Still active!</li>")
+                    }
+                }      
             });
     }    
 });
