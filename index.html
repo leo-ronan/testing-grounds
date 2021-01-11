@@ -28,64 +28,74 @@
         <span style="display: inline-block">
             <label for="disasters">Included Disaster</label>
             <br />
-            <select id="disasters" name="disasters">   
-                <option value="Biological">Biological</option>
-                <option value="Chemical">Chemical</option>
-                <option value="Coastal Storm">Coastal Storm</option>
-                <option value="Dam/Levee Break">Dam/Levee Break</option>
-                <option value="Drought">Drought</option>
-                <option value="Earthquake">Earthquake</option>
-                <option value="Explosion">Explosion</option>
-                <option value="Fire">Fire</option>
-                <option value="Fishing Losses">Fishing Losses</option>
-                <option value="Flood">Flood</option>
-                <option value="Freezing">Freezing</option>
-                <option value="Human Cause">Human Cause</option>
-                <option value="Hurricane">Hurricane</option>
-                <option value="Mud/Landslide">Mud/Landslide</option>
-                <option value="Other">Other</option>
-                <option value="Severe Ice Storm">Severe Ice Storm</option>
-                <option value="Severe Storm(s)">Severe Storm(s)</option>
-                <option value="Snow">Snow</option>
-                <option value="Terrorist">Terrorist</option>
-                <option value="Tornado">Tornado</option>
-                <option value="Toxic Substances">Toxic Substances</option>
-                <option value="Tsunami">Tsunami</option>
-                <option value="Typhoon">Typhoon</option>
-                <option value="Volcano">Volcano</option>
+            <select id="disasters" name="disasters">
+                <option class="incList" value=""></option>
+                <option class="incList" value="Biological">Biological</option>
+                <option class="incList" value="Chemical">Chemical</option>
+                <option class="incList" value="Coastal Storm">Coastal Storm</option>
+                <option class="incList" value="Dam/Levee Break">Dam/Levee Break</option>
+                <option class="incList" value="Drought">Drought</option>
+                <option class="incList" value="Earthquake">Earthquake</option>
+                <option class="incList" value="Explosion">Explosion</option>
+                <option class="incList" value="Fire">Fire</option>
+                <option class="incList" value="Fishing Losses">Fishing Losses</option>
+                <option class="incList" value="Flood">Flood</option>
+                <option class="incList" value="Freezing">Freezing</option>
+                <option class="incList" value="Human Cause">Human Cause</option>
+                <option class="incList" value="Hurricane">Hurricane</option>
+                <option class="incList" value="Mud/Landslide">Mud/Landslide</option>
+                <option class="incList" value="Other">Other</option>
+                <option class="incList" value="Severe Ice Storm">Severe Ice Storm</option>
+                <option class="incList" value="Severe Storm(s)">Severe Storm(s)</option>
+                <option class="incList" value="Snow">Snow</option>
+                <option class="incList" value="Terrorist">Terrorist</option>
+                <option class="incList" value="Tornado">Tornado</option>
+                <option class="incList" value="Toxic Substances">Toxic Substances</option>
+                <option class="incList" value="Tsunami">Tsunami</option>
+                <option class="incList" value="Typhoon">Typhoon</option>
+                <option class="incList" value="Volcano">Volcano</option>
             </select>
         </span>
         <span style="display: inline-block">
             <label for="eDisasters">Excluded Disasters</label>
             <br />
-            <select id="eDisasters" name="eDisasters">   
-                <option value="Biological">Biological</option>
-                <option value="Chemical">Chemical</option>
-                <option value="Coastal Storm">Coastal Storm</option>
-                <option value="Dam/Levee Break">Dam/Levee Break</option>
-                <option value="Drought">Drought</option>
-                <option value="Earthquake">Earthquake</option>
-                <option value="Explosion">Explosion</option>
-                <option value="Fire">Fire</option>
-                <option value="Fishing Losses">Fishing Losses</option>
-                <option value="Flood">Flood</option>
-                <option value="Freezing">Freezing</option>
-                <option value="Human Cause">Human Cause</option>
-                <option value="Hurricane">Hurricane</option>
-                <option value="Mud/Landslide">Mud/Landslide</option>
-                <option value="Other">Other</option>
-                <option value="Severe Ice Storm">Severe Ice Storm</option>
-                <option value="Severe Storm(s)">Severe Storm(s)</option>
-                <option value="Snow">Snow</option>
-                <option value="Terrorist">Terrorist</option>
-                <option value="Tornado">Tornado</option>
-                <option value="Toxic Substances">Toxic Substances</option>
-                <option value="Tsunami">Tsunami</option>
-                <option value="Typhoon">Typhoon</option>
-                <option value="Volcano">Volcano</option>
+            <select id="eDisasters" name="eDisasters">
+                <option class="excList" value=""></option>   
+                <option class="excList" value="Biological">Biological</option>
+                <option class="excList" value="Chemical">Chemical</option>
+                <option class="excList" value="Coastal Storm">Coastal Storm</option>
+                <option class="excList" value="Dam/Levee Break">Dam/Levee Break</option>
+                <option class="excList" value="Drought">Drought</option>
+                <option class="excList" value="Earthquake">Earthquake</option>
+                <option class="excList" value="Explosion">Explosion</option>
+                <option class="excList" value="Fire">Fire</option>
+                <option class="excList" value="Fishing Losses">Fishing Losses</option>
+                <option class="excList" value="Flood">Flood</option>
+                <option class="excList" value="Freezing">Freezing</option>
+                <option class="excList" value="Human Cause">Human Cause</option>
+                <option class="excList" value="Hurricane">Hurricane</option>
+                <option class="excList" value="Mud/Landslide">Mud/Landslide</option>
+                <option class="excList" value="Other">Other</option>
+                <option class="excList" value="Severe Ice Storm">Severe Ice Storm</option>
+                <option class="excList" value="Severe Storm(s)">Severe Storm(s)</option>
+                <option class="excList" value="Snow">Snow</option>
+                <option class="excList" value="Terrorist">Terrorist</option>
+                <option class="excList" value="Tornado">Tornado</option>
+                <option class="excList" value="Toxic Substances">Toxic Substances</option>
+                <option class="excList" value="Tsunami">Tsunami</option>
+                <option class="excList" value="Typhoon">Typhoon</option>
+                <option class="excList" value="Volcano">Volcano</option>
             </select>
         </span>
-        <ul id="data"></ul>
+        <div>
+            <label for="incStorage">Included:</label>
+            <span id="incStorage" name="incStorage">
+            </span>
+            <br />
+            <label for="excStorage">Excluded:</label>
+            <span id="excStorage" name="excStorage">
+            </span>
+        </div>
     </div>
 </body>
 </html>
